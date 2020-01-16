@@ -12,4 +12,5 @@ all: $(objects)
 %.o: %.F90
 	$(FC) -c $(FC_FLAGS) $<
 
-
+clean:
+	rm mp *.o *.mod

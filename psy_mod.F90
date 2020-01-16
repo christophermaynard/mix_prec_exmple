@@ -3,6 +3,12 @@ program psy_layer
   use field_mod, only : field_type, field_proxy_type
   use rsolver_field_mod, only : rsolver_field_type, rsolver_field_proxy_type
 
+  ! PSyclone will need to scan the Algorithm layer to find the types of the fields.
+  ! the invoke would look like ...
+  ! call invoke( mix_prec_kernel_type(field1), mix_prec_kernel_type(field2) )
+  ! field1 and field2 are declared as differnt field types in the alg layer. Similar to the PSy layer code below.
+  !
+ 
   type(field_type) :: f1
   type(field_proxy_type) :: f1_p
   type(rsolver_field_type) :: f2
