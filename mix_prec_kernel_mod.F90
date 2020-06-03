@@ -12,35 +12,38 @@ module mix_prec_kernel_mod
           /)
      integer :: iterates_over = CELLS
    contains
-     procedure, nopass :: mix_prec_code
-
+!     procedure, nopass :: mix_prec_code 
   end type mix_prec_kernel_type
 
+  
   interface mix_prec_code
-     module procedure mix_prec_code_r32, mix_prec_code_r64, mix_prec_code_r128
+     module procedure mix_prec_code_r32, mix_prec_code_r64, mix_prec_code_mixed
   end interface mix_prec_code
   
 contains
   subroutine mix_prec_code_r32(f1, f2)
     implicit none
-    real(kind=real32), intent(in) :: f1, f2
+    real(kind=real32), intent(in) :: f2
+    real(kind=real32), intent(inout) :: f1    
     f1 = f2
     write(*,*) "32-bit"
   end subroutine mix_prec_code_r32
   
   subroutine mix_prec_code_r64(f1, f2)
     implicit none
-    real(kind=real64), intent(in) :: f1, f2
+    real(kind=real64), intent(in) :: f2
+    real(kind=real64), intent(inout) :: f1        
     f1 = f2
     write(*,*) "64-bit"
   end subroutine mix_prec_code_r64
 
-  subroutine mix_prec_code_r128(f1, f2)
+  subroutine mix_prec_code_mixed(f1, f2)
     implicit none
-    real(kind=real128), intent(in) :: f1, f2
-    f1 = f2
-    write(*,*) "128-bit"
-  end subroutine mix_prec_code_r128
+    real(kind=real64), intent(in) :: f2
+    real(kind=real32), intent(inout) :: f1        
+    f1 = real(f2,kind=real32)
+    write(*,*) "real mixed prec"
+  end subroutine mix_prec_code_mixed
   
 end module mix_prec_kernel_mod
 

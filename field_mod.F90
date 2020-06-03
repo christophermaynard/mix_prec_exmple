@@ -2,7 +2,6 @@ module head_field_mod
   implicit none
 
   type, public, abstract :: head_field_type
-     private
    contains
      ! a lot of procedures
   end type head_field_type
@@ -15,8 +14,7 @@ module field_mod
   implicit none
 
   type, extends(head_field_type), public :: field_type
-     private
-     real(kind=r_def) :: data
+     real(kind=r_def), public :: data
    contains
      procedure, public :: get_proxy
   end type field_type
@@ -43,7 +41,7 @@ module rsolver_field_mod
   implicit none
   
   type, extends(head_field_type), public :: rsolver_field_type
-     private
+     
      real(kind=r_solver) :: data
    contains
      procedure, public :: get_proxy
@@ -63,6 +61,5 @@ contains
 
     proxy%data => self%data
   end function get_proxy
-  
-  
+
 end module rsolver_field_mod
