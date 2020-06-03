@@ -5,7 +5,8 @@
     IMPLICIT NONE
     CONTAINS
     SUBROUTINE invoke_0_mix_prec_kernel_type(f1, f2)
-      USE mix_prec_kernel_mod, ONLY: mix_prec_code
+!      USE mix_prec_kernel_mod, ONLY: mix_prec_code
+      USE mix_prec_kernel_mod, ONLY: mix_prec_kernel_type      
       TYPE(field_type), intent(in) :: f2
       type(rsolver_field_type), intent(inout) :: f1
 !      INTEGER(KIND=i_def) cell
@@ -14,7 +15,8 @@
       type(rsolver_field_proxy_type) :: f1_proxy
 !      INTEGER(KIND=i_def), pointer :: map_aspc1_f1(:,:) => null()
 !      INTEGER(KIND=i_def) ndf_aspc1_f1, undf_aspc1_f1
-!      TYPE(mesh_type), pointer :: mesh => null()
+      !      TYPE(mesh_type), pointer :: mesh => null()
+      type(mix_prec_kernel_type) :: mi_kernel
       !
       ! Initialise field and/or operator proxies
       !
@@ -47,7 +49,8 @@
 !     DO cell=1,mesh%get_last_halo_cell(1)
         !
       !        CALL mix_prec_code(nlayers, f1_proxy%data, f2_proxy%data, ndf_aspc1_f1, undf_aspc1_f1, map_aspc1_f1(:,cell))
-      call mix_prec_code(f1_proxy%data, f2_proxy%data)
+!      call mix_prec_code(f1_proxy%data, f2_proxy%data)
+      call mi_kernel%mix_prec_code(f1_proxy%data, f2_proxy%data)      
 !      END DO
       !
       ! Set halos dirty/clean for fields modified in the above loop
