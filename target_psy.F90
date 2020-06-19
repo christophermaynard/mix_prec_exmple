@@ -49,8 +49,12 @@
 !     DO cell=1,mesh%get_last_halo_cell(1)
         !
       !        CALL mix_prec_code(nlayers, f1_proxy%data, f2_proxy%data, ndf_aspc1_f1, undf_aspc1_f1, map_aspc1_f1(:,cell))
-      call mix_prec_code(f1_proxy%data, f2_proxy%data)
-!      call mi_kernel%mix_prec_code(f1_proxy%data, f2_proxy%data)       ! F2K3 OO overload. Not using this
+      write(*,*) "Calling kernel with field_type"
+      call mix_prec_code(f1_proxy%data,f1_proxy%data)
+      write(*,*) "Calling kernel with rsolver_field_type"  
+      call mix_prec_code(f2_proxy%data,f2_proxy%data)
+      write(*,*) "Calling kernel with both field_type(s)"
+      call mix_prec_code(f1_proxy%data,f2_proxy%data)        
 !      END DO
       !
       ! Set halos dirty/clean for fields modified in the above loop

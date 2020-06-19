@@ -12,15 +12,6 @@ module mix_prec_kernel_mod
           /)
      integer :: iterates_over = CELLS
    contains
-     ! PSyclone requires this
-!     procedure, nopass :: mixed_prec_code
-
-! F2K3 OO over-loading, works but cannot call mix_prec_code without type     
-!     procedure, nopass :: mix_prec_code_r32
-!     procedure, nopass :: mix_prec_code_r64
-!     procedure, nopass :: mix_prec_code_mixed
-!     generic, public :: mix_prec_code => mix_prec_code_r32, mix_prec_code_r64, &
-!                        mix_prec_code_mixed
   end type mix_prec_kernel_type
 
 ! F90 style over-loading - cannot work with type bound procedures  

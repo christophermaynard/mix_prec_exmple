@@ -1,5 +1,5 @@
 program psy_layer
-  use mix_prec_kernel_mod, only : mix_prec_kernel_type
+  use mix_prec_kernel_mod, only : mix_prec_code
   use field_mod, only : field_type, field_proxy_type
   use rsolver_field_mod, only : rsolver_field_type, rsolver_field_proxy_type
 
@@ -20,8 +20,10 @@ program psy_layer
   f2_p = f2%get_proxy()
 
   write(*,*) "Calling kernel with field_type"
-  call mpk%mix_prec_code(f1_p%data)
+  call %mix_prec_code(f1_p%data,f1_p%data)
   write(*,*) "Calling kernel with rsolver_field_type"  
-  call mpk%mix_prec_code(f2_p%data)
+  call mix_prec_code(f2_p%data,f2_p%data)
+  write(*,*) "Calling kernel with both field_type(s)"
+  call mix_prec_code(f1_p%data,f2_p%data)  
   
 end program psy_layer
