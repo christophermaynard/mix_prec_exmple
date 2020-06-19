@@ -29,6 +29,7 @@ module mix_prec_kernel_mod
   end interface mix_prec_code
   
 contains
+  
   subroutine mix_prec_code_r32(f1, f2)
     implicit none
     real(kind=real32), intent(in) :: f2
